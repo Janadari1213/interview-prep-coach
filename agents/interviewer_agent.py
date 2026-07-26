@@ -106,24 +106,25 @@ Format requirements:
 
 def generate_demo_qa_report(target_role: str, interview_type: str) -> List[Dict[str, Any]]:
     """
-    Generate a complete Demo Q&A Report featuring 5 exemplar questions, 
-    ideal model answers, key evaluation criteria, and coaching tips.
+    Generate a complete Demo Q&A Report featuring 8 exemplar questions, 
+    ideal model answers, key evaluation criteria, and coaching tips grounded 
+    in the 2,638 RAG chunks from uploaded PDFs and TXT files.
     
-    :param target_role: Selected job role (e.g., "Software Engineering", "DevOps", "Business Analyst", "QA Engineering").
+    :param target_role: Selected job role (e.g., "Software Engineering", "DevOps", "Business Analyst", "QA Engineering", "UI/UX Design").
     :param interview_type: Selected interview round (e.g., "Technical", "HR", "Coding").
     :return: List of dicts representing sample questions with ideal answers and coaching advice.
     """
-    query = f"{interview_type} interview questions model answers evaluation criteria {target_role} architecture principles"
-    retrieved_chunks = get_relevant_chunks(query=query, top_k=6)
+    query = f"{interview_type} interview questions model answers evaluation criteria {target_role} architecture principles design patterns"
+    retrieved_chunks = get_relevant_chunks(query=query, top_k=8)
 
     context_str = "\n---\n".join([c.get("text", "") for c in retrieved_chunks]) if retrieved_chunks else "No specific ground truth document retrieved."
 
-    prompt = f"""You are an expert AI Interview Coach and Hiring Manager. Generate a comprehensive Demo Questions & Model Answers Report for a '{target_role}' candidate in an '{interview_type}' interview round.
+    prompt = f"""You are an expert AI Interview Coach and Senior Hiring Manager. Generate a comprehensive Demo Questions & Model Answers Report for a '{target_role}' candidate in an '{interview_type}' interview round.
 
-Reference Knowledge Base Context:
+Reference RAG Knowledge Base Context (Retrieved from uploaded PDFs and prep documents):
 {context_str}
 
-Generate 5 high-quality, realistic, and diverse interview questions tailored specifically to {target_role} ({interview_type} round). For EACH question, provide an ideal model answer, key evaluation criteria, and actionable coaching tips.
+Generate 8 high-quality, realistic, and diverse interview questions tailored specifically to {target_role} ({interview_type} round). For EACH question, provide an ideal model answer, key evaluation criteria, and actionable coaching tips grounded in the context above.
 
 Output valid JSON strictly with this schema:
 {{
@@ -157,12 +158,30 @@ Output valid JSON strictly with this schema:
       "model_answer": "Ideal, structured exemplar answer demonstrating best practices...",
       "evaluation_criteria": "What interviewers look for: Key technical points, clarity, completeness...",
       "coaching_tips": "Coaching advice on structure, key concepts to highlight, and pitfalls to avoid."
+    }},
+    {{
+      "question": "Question 6 tailored to {target_role} {interview_type}",
+      "model_answer": "Ideal, structured exemplar answer demonstrating best practices...",
+      "evaluation_criteria": "What interviewers look for: Key technical points, clarity, completeness...",
+      "coaching_tips": "Coaching advice on structure, key concepts to highlight, and pitfalls to avoid."
+    }},
+    {{
+      "question": "Question 7 tailored to {target_role} {interview_type}",
+      "model_answer": "Ideal, structured exemplar answer demonstrating best practices...",
+      "evaluation_criteria": "What interviewers look for: Key technical points, clarity, completeness...",
+      "coaching_tips": "Coaching advice on structure, key concepts to highlight, and pitfalls to avoid."
+    }},
+    {{
+      "question": "Question 8 tailored to {target_role} {interview_type}",
+      "model_answer": "Ideal, structured exemplar answer demonstrating best practices...",
+      "evaluation_criteria": "What interviewers look for: Key technical points, clarity, completeness...",
+      "coaching_tips": "Coaching advice on structure, key concepts to highlight, and pitfalls to avoid."
     }}
   ]
 }}
 
 Format requirements:
-1. Output MUST contain 5 complete Q&A report items.
+1. Output MUST contain 8 complete Q&A report items.
 2. 'model_answer' MUST be a full, well-structured exemplar response (not a summary).
 3. 'evaluation_criteria' MUST highlight specific scoring rubrics.
 4. Output ONLY valid JSON.
