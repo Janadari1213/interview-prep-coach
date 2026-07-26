@@ -1,0 +1,19 @@
+# Environment variables
+.env
+
+# Python cache & bytecode
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+.venv/
+env/
+
+# Streamlit configuration & secrets
+.streamlit/secrets.toml
+
+# Vector Database storage
+chroma_db/
