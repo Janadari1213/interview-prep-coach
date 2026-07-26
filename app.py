@@ -6,14 +6,11 @@ LangGraph orchestration, Groq, OpenRouter, and ChromaDB vector retrieval.
 """
 
 import sys
-import io
 import streamlit as st
 from dotenv import load_dotenv
 
-# Ensure UTF-8 output encoding
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
-
 load_dotenv()
+
 
 from graph.orchestrator import run_interview_step, InterviewState
 from agents.interviewer_agent import generate_interview_question
