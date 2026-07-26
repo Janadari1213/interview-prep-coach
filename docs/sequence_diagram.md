@@ -1,61 +1,58 @@
 # Agent Communication Sequence Diagram
 
-The sequence diagram below illustrates the message flow and shared state transitions across the multi-agent pipeline during a single interview turn.
+The sequence diagram below illustrates the message flow and retrieval-grounded generation sequence for the **Interview Preparation Guide** and **Demo Q&A Model Answers Report**.
 
 ```mermaid
 sequenceDiagram
     autonumber
     actor User as Candidate User
     participant UI as Streamlit UI (app.py)
-    participant Graph as LangGraph Orchestrator
-    participant Interviewer as Interviewer Agent (Groq)
-    participant RAG as RAG Retriever (ChromaDB)
-    participant Evaluator as Evaluator Agent (Groq)
-    participant Coach as Coach Agent (OpenRouter)
+    participant Graph as LangGraph Orchestrator (graph/orchestrator.py)
+    participant Interviewer as Interviewer Agent (agents/interviewer_agent.py)
+    participant RAG as RAG Retriever (rag/retriever.py)
+    participant Groq as Groq API (llama-3.1-8b-instant)
 
-    User->>UI: Select Role & Category -> Click 'Start'
-    UI->>Graph: Initialize InterviewState (role, type, count=0)
-    Graph->>Interviewer: Request question for target_role
-    Interviewer-->>Graph: Return current_question
-    Graph-->>UI: Update InterviewState & Display Question
-
-    User->>UI: Input candidate answer -> Click 'Submit'
-    UI->>Graph: run_interview_step(state, user_answer)
+    User->>UI: Select Role (e.g. Software Engineering) & Category (Technical)
+    User->>UI: Click 'Generate Interview Guide & Q&A Report'
     
-    Graph->>RAG: get_relevant_chunks(current_question, top_k=4)
-    RAG-->>Graph: Return retrieved_context snippets
+    UI->>Graph: get_interview_guide(role, interview_type)
+    Graph->>Interviewer: generate_guide(role, interview_type)
+    
+    Interviewer->>RAG: get_relevant_chunks(role + interview_type query, top_k=4)
+    RAG-->>Interviewer: Return retrieved context snippets
 
-    Graph->>Evaluator: Evaluate (question, user_answer, retrieved_context)
-    Evaluator-->>Graph: Return evaluation dict (correctness, clarity, completeness, notes)
+    Interviewer->>Groq: Request structured guide JSON (overview, themes, behavior tips)
+    Groq-->>Interviewer: Return JSON guide response
 
-    Graph->>Coach: Generate feedback (question, user_answer, evaluation, retrieved_context)
-    Coach-->>Graph: Return feedback dict (✓ strengths, ✗ gaps, suggestions)
+    Graph->>Interviewer: generate_demo_qa_report(role, interview_type)
+    Interviewer->>Groq: Request sample questions + ideal model answers + criteria + tips
+    Groq-->>Interviewer: Return JSON QA Report response
 
-    alt Question Count < 5 AND session not ended
-        Graph->>Interviewer: Generate next_question
-        Interviewer-->>Graph: Return next current_question, count++
-        Graph-->>UI: Return updated state (feedback + next question)
-        UI-->>User: Display feedback card + next question card
-    else Question Count >= 5 OR 'end interview'
-        Graph-->>UI: Set is_complete = True
-        UI-->>User: Display final performance scorecard summary
-    end
+    Graph-->>UI: Return state dict (interview_guide, demo_qa_report)
+    UI-->>User: Display Interview Preparation Guide & Demo Questions/Model Answers Report
 ```
 
-### Shared State Lifecycle
+### Shared State Schema
 
-At each step in the sequence, the shared `InterviewState` `TypedDict` object is enriched:
+During guide & report generation, the `InterviewState` dictionary contains:
 
 ```python
 {
+    "role": "Software Engineering",
+    "target_role": "Software Engineering",
     "interview_type": "Technical",
-    "target_role": "Software Engineer",
-    "current_question": "Explain abstract class vs interface.",
-    "user_answer": "Abstract classes support single inheritance...",
-    "retrieved_context": [{"text": "...", "source": "technical_prep.txt"}],
-    "evaluation": {"correctness": "Good", "clarity": "Excellent", "completeness": "Good"},
-    "feedback": {"strengths": ["✓ ..."], "gaps": ["✗ ..."], "suggestions": ["..."]},
-    "question_count": 1,
-    "is_complete": False
+    "interview_guide": {
+        "overview": "Detailed overview of the 45-60 min technical round...",
+        "question_themes": ["Core OOP abstractions", "System performance", "Incident response"],
+        "behavior_tips": ["Use STAR method", "Think aloud for technical logic", "Verify assumptions"]
+    },
+    "demo_qa_report": [
+        {
+            "question": "What is the difference between an abstract class and an interface?",
+            "model_answer": "An abstract class represents an 'is-a' hierarchy with shared state...",
+            "evaluation_criteria": "Single vs. multiple inheritance, state vs. contract...",
+            "coaching_tips": "Compare Purpose, State, and Inheritance structured into 3 points."
+        }
+    ]
 }
 ```
