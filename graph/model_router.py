@@ -67,7 +67,8 @@ def call_groq(prompt: str, model_name: str = "llama-3.1-8b-instant", system_prom
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": prompt}
                 ],
-                "temperature": 0.4
+                "temperature": 0.4,
+                "max_tokens": 4096
             }
             if json_mode:
                 kwargs["response_format"] = {"type": "json_object"}
