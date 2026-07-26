@@ -1,0 +1,23 @@
+=== CODING INTERVIEW PREPARATION GUIDE: TWO SUM PROBLEM ===
+
+1. HOW TO SOLVE THE TWO SUM PROBLEM
+
+Problem Statement:
+Given an array of integers `nums` and an integer `target`, return indices of the two numbers such that they add up to `target`.
+
+- Brute Force Approach:
+  Iterate through all pairs (i, j) using nested loops. Check if nums[i] + nums[j] == target.
+  Time Complexity: O(n^2)
+  Space Complexity: O(1)
+
+- Optimal Hash Map Approach:
+  Use a hash table (dictionary) to store each number's complement (`target - num`) as you iterate through the array.
+  Algorithm Steps:
+  1. Initialize an empty hash map `seen = {}` mapping value -> index.
+  2. Loop through `nums` with index `i` and value `num`.
+  3. Calculate `complement = target - num`.
+  4. If `complement` exists in `seen`, return `[seen[complement], i]`.
+  5. Otherwise, record `seen[num] = i`.
+  
+  Time Complexity: O(n) single pass
+  Space Complexity: O(n) hash map storage

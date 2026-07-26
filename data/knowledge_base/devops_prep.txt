@@ -1,0 +1,13 @@
+=== DEVOPS INTERVIEW PREPARATION GUIDE ===
+
+1. COMMON DEVOPS INTERVIEW QUESTIONS & CONCEPTS
+
+- CI/CD Pipelines: Continuous Integration and Continuous Deployment focus on automating build, test, and deployment stages. CI ensures code changes are automatically validated via unit and integration tests. CD automates deployment to staging and production environments seamlessly.
+
+- Containerization & Orchestration (Docker & Kubernetes):
+  * Docker packages applications into lightweight, reproducible container images.
+  * Kubernetes (K8s) manages container orchestration, handling auto-scaling, service discovery, rolling updates, and self-healing across cluster nodes.
+
+- Infrastructure as Code (IaC): Tools like Terraform and CloudFormation allow infrastructure provisioning via version-controlled declarative configuration files rather than manual dashboard operations.
+
+- Monitoring & Observability: Implementing Prometheus, Grafana, and ELK stack (Elasticsearch, Logstash, Kibana) for centralized logging, metrics tracking, and proactive alerting.

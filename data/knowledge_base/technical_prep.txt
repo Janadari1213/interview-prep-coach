@@ -1,0 +1,21 @@
+=== TECHNICAL INTERVIEW PREPARATION GUIDE: OBJECT ORIENTED PROGRAMMING ===
+
+1. ABSTRACT CLASS VS INTERFACE IN SOFTWARE ENGINEERING
+
+An Abstract Class and an Interface are core OOP abstractions used to define contracts and class hierarchies, but they differ fundamentally in usage and capabilities:
+
+- Definition & Purpose:
+  * Abstract Class: Represents an "is-a" relationship. It provides a base class with shared state and implementation details for closely related subclasses.
+  * Interface: Represents a "can-do" or "has-a" behavioral contract. It defines what methods a class must implement without dictating state or implementation details.
+
+- Inheritance:
+  * Abstract Class: Single inheritance only in languages like Java and C++ (a subclass can inherit from only one abstract class).
+  * Interface: Multiple inheritance of type (a class can implement multiple interfaces simultaneously).
+
+- State & Fields:
+  * Abstract Class: Can contain instance variables, fields, constructors, and private/protected members with state.
+  * Interface: Cannot hold instance state variables (fields are implicitly public static final constants).
+
+- Method Implementation:
+  * Abstract Class: Can contain both concrete (implemented) methods and abstract methods requiring subclass override.
+  * Interface: Historically contained only abstract methods; modern languages allow default or static methods, but cannot maintain state.

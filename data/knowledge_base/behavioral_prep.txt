@@ -1,0 +1,16 @@
+=== BEHAVIORAL INTERVIEW PREPARATION GUIDE ===
+
+1. THE STAR METHOD FOR BEHAVIORAL QUESTIONS
+The STAR method is a structured manner of responding to a behavioral-based interview question by discussing the specific Situation, Task, Action, and Result of the situation you are describing.
+
+- Situation: Set the scene and give the necessary details of your example. Describe the specific event or situation you were in.
+- Task: Describe the responsibility or challenge you had to complete in that situation.
+- Action: Explain exactly what steps you took to address the situation. Focus on YOUR individual contributions and decision-making process.
+- Result: Share the outcomes achieved by your action. Quantify results with metrics whenever possible (e.g., improved load time by 30%, reduced server crashes by 50%).
+
+2. ANSWERING "TELL ME ABOUT A TIME YOU FAILED"
+When answering questions about failure:
+- Be honest and choose a real professional or academic setback, but avoid critical flaws that compromise core job competence.
+- Take full ownership of the mistake without blaming teammates or external circumstances.
+- Explain the immediate corrective steps you took to mitigate the problem.
+- Emphasize key takeaways and lessons learned: how this experience transformed your technical workflow, testing practices, or communication skills to prevent recurring mistakes in future projects.
