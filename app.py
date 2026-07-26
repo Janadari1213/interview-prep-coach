@@ -104,7 +104,7 @@ st.markdown("""
         box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
     }
     
-    /* Interactive Pills */
+    /* Interactive Badges & Pills */
     .badge-role {
         background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
         color: #FFFFFF;
@@ -124,6 +124,35 @@ st.markdown("""
         font-size: 0.95rem;
         box-shadow: 0 4px 6px -1px rgba(124, 58, 237, 0.3);
         display: inline-block;
+    }
+
+    /* Difficulty Pills */
+    .diff-easy {
+        background: rgba(16, 185, 129, 0.2);
+        color: #34D399;
+        border: 1px solid #10B981;
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        font-weight: 700;
+        font-size: 0.85rem;
+    }
+    .diff-medium {
+        background: rgba(245, 158, 11, 0.2);
+        color: #FBBF24;
+        border: 1px solid #F59E0B;
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        font-weight: 700;
+        font-size: 0.85rem;
+    }
+    .diff-hard {
+        background: rgba(239, 68, 68, 0.2);
+        color: #F87171;
+        border: 1px solid #EF4444;
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        font-weight: 700;
+        font-size: 0.85rem;
     }
 
     /* Theme & Tip Item Boxes */
@@ -148,6 +177,17 @@ st.markdown("""
         font-size: 1.02rem;
     }
 
+    /* Why Asked Box */
+    .why-asked-box {
+        background: rgba(30, 58, 138, 0.25);
+        border-left: 4px solid #60A5FA;
+        padding: 0.9rem 1.1rem;
+        border-radius: 0 10px 10px 0;
+        color: #93C5FD;
+        font-size: 0.98rem;
+        margin-bottom: 1rem;
+    }
+
     /* Model Answer Container */
     .model-answer-box {
         background: rgba(6, 78, 59, 0.28);
@@ -158,9 +198,10 @@ st.markdown("""
         font-size: 1.02rem;
         line-height: 1.65;
         margin-top: 0.5rem;
+        margin-bottom: 1rem;
     }
 
-    /* Criteria & Advice Containers */
+    /* Criteria & Red Flag Containers */
     .criteria-box {
         background: rgba(120, 53, 15, 0.28);
         border: 1px solid rgba(245, 158, 11, 0.35);
@@ -168,6 +209,16 @@ st.markdown("""
         padding: 1.2rem;
         color: #FEF3C7;
         font-size: 0.98rem;
+        height: 100%;
+    }
+    .red-flag-box {
+        background: rgba(127, 29, 29, 0.28);
+        border: 1px solid rgba(239, 68, 68, 0.35);
+        border-radius: 12px;
+        padding: 1.2rem;
+        color: #FCA5A5;
+        font-size: 0.98rem;
+        height: 100%;
     }
     .tips-box {
         background: rgba(12, 74, 110, 0.28);
@@ -176,6 +227,7 @@ st.markdown("""
         padding: 1.2rem;
         color: #E0F2FE;
         font-size: 0.98rem;
+        margin-top: 1rem;
     }
 
     /* Streamlit UI Element Styling */
@@ -257,23 +309,23 @@ def render_role_selection():
             try:
                 with status_box:
                     # Agent Step 1: RAG Retrieval
-                    st.write("🔍 **Step 1/3: RAG Retriever** querying ChromaDB vector store (`all-MiniLM-L6-v2` embeddings)...")
+                    st.write("🔍 **Step 1/3: RAG Retriever** querying ChromaDB vector store across 2,638 PDF/TXT knowledge chunks...")
                     progress_bar.progress(33)
                     time.sleep(0.4)
 
-                    # Agent Step 2: Interviewer Agent
-                    st.write(f"🧠 **Step 2/3: Interviewer Agent** synthesizing domain guidelines for `{role}` (`{itype}` round) via Groq API...")
+                    # Agent Step 2: Interviewer Agent Guide
+                    st.write(f"🧠 **Step 2/3: Interviewer Agent** synthesizing preparation guide for `{role}` (`{itype}` round)...")
                     guide_data = generate_interview_guide(target_role=role, interview_type=itype)
                     progress_bar.progress(66)
                     time.sleep(0.4)
 
-                    # Agent Step 3: Coach & Evaluator Agents
-                    st.write("💎 **Step 3/3: Coach & Evaluator Agents** formulating exemplar model answers & scoring rubrics...")
+                    # Agent Step 3: Coach & Evaluator Agents Report
+                    st.write("💎 **Step 3/3: Coach & Evaluator Agents** formulating 8 Master Q&A Scorecards & scoring rubrics...")
                     qa_report = generate_demo_qa_report(target_role=role, interview_type=itype)
                     progress_bar.progress(100)
                     time.sleep(0.3)
 
-                    status_box.update(label="✅ **Multi-Agent Report Successfully Synthesized!**", state="complete", expanded=False)
+                    status_box.update(label="✅ **Multi-Agent Master Report Successfully Synthesized!**", state="complete", expanded=False)
 
                 st.session_state.guide_data = guide_data
                 st.session_state.qa_report = qa_report
@@ -313,7 +365,7 @@ def render_guide_and_report():
     # INTERACTIVE REPORT TABS
     tab_guide, tab_report, tab_architecture = st.tabs([
         "📚 Step 3: Preparation Guide & Strategy",
-        "📋 Step 4: Demo Questions & Model Answers Report",
+        f"📋 Step 4: 8-Question Master Q&A Scorecard ({len(qa_report)} Questions)",
         "⚡ Agentic AI System Architecture"
     ])
 
@@ -332,7 +384,7 @@ def render_guide_and_report():
         with col_g1:
             st.markdown("""
             <div class="glass-card">
-                <h4 style="color: #38BDF8; margin-top: 0; font-size: 1.25rem;">🎯 Key Question Themes</h4>
+                <h4 style="color: #38BDF8; margin-top: 0; font-size: 1.25rem;">🎯 Key Competency & Question Themes</h4>
             """, unsafe_allow_html=True)
             themes = guide.get("question_themes", [])
             for theme in themes:
@@ -342,21 +394,37 @@ def render_guide_and_report():
         with col_g2:
             st.markdown("""
             <div class="glass-card">
-                <h4 style="color: #C084FC; margin-top: 0; font-size: 1.25rem;">💡 Behavioral & Etiquette Tips</h4>
+                <h4 style="color: #C084FC; margin-top: 0; font-size: 1.25rem;">💡 Behavioral & Strategic Execution Tips</h4>
             """, unsafe_allow_html=True)
             tips = guide.get("behavior_tips", [])
             for tip in tips:
                 st.markdown(f'<div class="tip-item">✨ {tip}</div>', unsafe_allow_html=True)
             st.markdown('</div>', unsafe_allow_html=True)
 
-    # TAB 2: Demo Questions & Ideal Model Answers Report
+    # TAB 2: 8-Question Master Q&A Scorecard Report
     with tab_report:
-        st.markdown("### 📋 Exemplar Questions & Model Answers Scorecard")
-        st.caption("Review these sample interview questions, ideal response structures, scoring criteria, and coaching advice.")
+        st.markdown(f"### 📋 {role} ({itype} Round) Master Q&A Scorecard")
+        st.caption("Comprehensive breakdown of questions, difficulty ratings, recruiter evaluation motives, exemplar answers, scoring criteria vs red flags, and coach tips.")
 
         if qa_report:
             for idx, item in enumerate(qa_report, start=1):
-                with st.expander(f"📌 Question {idx}: {item.get('question')}", expanded=(idx == 1)):
+                diff = item.get("difficulty", "Medium").title()
+                diff_class = "diff-easy" if "Easy" in diff else ("diff-hard" if "Hard" in diff else "diff-medium")
+
+                with st.expander(f"Question {idx}: {item.get('question')}", expanded=(idx == 1)):
+                    st.markdown(f"""
+                    <div style="margin-bottom: 0.8rem;">
+                        <span class="{diff_class}">Difficulty: {diff}</span>
+                    </div>
+                    """, unsafe_allow_html=True)
+
+                    if item.get("why_asked"):
+                        st.markdown(f"""
+                        <div class="why-asked-box">
+                            <strong>🎯 Why Recruiter Asks This:</strong> {item.get('why_asked')}
+                        </div>
+                        """, unsafe_allow_html=True)
+
                     st.markdown(f"""
                     <div class="model-answer-box">
                         <strong style="color: #34D399; font-size: 1.08rem;">✨ Ideal Model Answer:</strong><br><br>
@@ -364,22 +432,30 @@ def render_guide_and_report():
                     </div>
                     """, unsafe_allow_html=True)
 
-                    st.markdown("<br>", unsafe_allow_html=True)
                     col_e1, col_e2 = st.columns(2)
 
                     with col_e1:
                         st.markdown(f"""
                         <div class="criteria-box">
-                            <strong style="color: #FBBF24; font-size: 1.02rem;">🔍 Key Evaluation Criteria:</strong><br><br>
+                            <strong style="color: #FBBF24; font-size: 1.02rem;">🔍 Scoring Criteria (5/5 Score):</strong><br><br>
                             {item.get('evaluation_criteria', 'N/A')}
                         </div>
                         """, unsafe_allow_html=True)
 
                     with col_e2:
+                        red_flags = item.get('red_flags', 'Lacking technical depth or structured communication.')
+                        st.markdown(f"""
+                        <div class="red-flag-box">
+                            <strong style="color: #F87171; font-size: 1.02rem;">🚩 Common Red Flags to Avoid:</strong><br><br>
+                            {red_flags}
+                        </div>
+                        """, unsafe_allow_html=True)
+
+                    if item.get("coaching_tips"):
                         st.markdown(f"""
                         <div class="tips-box">
-                            <strong style="color: #38BDF8; font-size: 1.02rem;">💡 Coach Tips & Best Practices:</strong><br><br>
-                            {item.get('coaching_tips', 'N/A')}
+                            <strong style="color: #38BDF8; font-size: 1.02rem;">💡 Coach Strategy & Pro Tip:</strong><br><br>
+                            {item.get('coaching_tips')}
                         </div>
                         """, unsafe_allow_html=True)
         else:
@@ -392,7 +468,7 @@ def render_guide_and_report():
         <div class="glass-card">
             <h4 style="color: #38BDF8; margin-top: 0;">🤖 Agentic Pipeline Specifications</h4>
             <ul>
-                <li><strong>RAG Context Retriever</strong>: ChromaDB local vector database with <code>sentence-transformers/all-MiniLM-L6-v2</code> embeddings.</li>
+                <li><strong>RAG Context Retriever</strong>: ChromaDB local vector database storing 2,638 chunks with <code>sentence-transformers/all-MiniLM-L6-v2</code> embeddings.</li>
                 <li><strong>Interviewer Agent</strong>: Groq API backing <code>llama-3.1-8b-instant</code> for rapid sub-second guide and question synthesis.</li>
                 <li><strong>Evaluator Agent</strong>: Groq API for rapid rubric evaluation against retrieved vector chunks.</li>
                 <li><strong>Coach Agent</strong>: OpenRouter API backing <code>meta-llama/llama-3.3-70b-instruct</code> for deep reflection and structured coaching advice.</li>
