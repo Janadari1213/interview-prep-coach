@@ -1,0 +1,101 @@
+=== CLOUD ARCHITECTURE & CYBERSECURITY INTERVIEW KNOWLEDGE BASE (20+ DEMO QUESTIONS & MODEL ANSWERS) ===
+
+Q1: What is the Shared Responsibility Model in Cloud Computing (AWS/Azure/GCP)?
+Model Answer: The Shared Responsibility Model delineates security obligations: Cloud Providers manage security OF the cloud (physical data centers, host hardware, hypervisors, global networking). Customers manage security IN the cloud (guest OS patching, IAM policies, network firewall rules, data encryption, and application code).
+Evaluation Criteria: Distinction between IaaS, PaaS, SaaS responsibility shifts, customer vs cloud provider boundaries.
+Coaching Tips: Emphasize that customer data security and access management always remain customer responsibilities.
+
+Q2: Explain Zero Trust Architecture and its core principles.
+Model Answer: Zero Trust operates on the principle "Never Trust, Always Verify". It assumes network perimeters are compromised and requires explicit authentication, continuous authorization, least privilege access controls, and end-to-end encryption for every user, device, and microservice communication.
+Evaluation Criteria: Micro-segmentation, identity-centric security, least privilege, and continuous session verification.
+Coaching Tips: Contrast traditional perimeter-based security (castle-and-moat) with Zero Trust.
+
+Q3: What is Infrastructure as Code (IaC) and how do Terraform and CloudFormation work?
+Model Answer: IaC manages infrastructure provisioning via declarative configuration files rather than manual dashboard clicks. Terraform uses HCL (HashiCorp Configuration Language) and cloud provider plugins to manage multi-cloud resources, tracking infrastructure state in a `.tfstate` file to perform idempotent deployments.
+Evaluation Criteria: Declarative vs imperative syntax, state file management, idempotency, and drift detection.
+Coaching Tips: Explain remote state storage with state locking (e.g. S3 + DynamoDB for Terraform) to prevent concurrent deployment collisions.
+
+Q4: What is the OWASP Top 10 and how do you defend against Injection and XSS attacks?
+Model Answer: OWASP Top 10 lists critical web application security risks. SQL Injection occurs when untrusted input alters database queries; defense uses Parameterized Queries (Prepared Statements). Cross-Site Scripting (XSS) injects malicious scripts executed in user browsers; defense uses Context-Aware Output Encoding and Content Security Policy (CSP) headers.
+Evaluation Criteria: Prepared statements syntax, XSS sanitization, HTTP security headers, and input validation.
+Coaching Tips: Explain why ORMs use parameterized queries by default to prevent SQL injection.
+
+Q5: Explain Cloud High Availability, Fault Tolerance, and Disaster Recovery (RPO / RTO).
+Model Answer: High Availability ensures systems operate continuously using load balancers and multi-Availability Zone auto-scaling. Disaster Recovery plans handle region failures. Recovery Point Objective (RPO) is maximum acceptable data loss measured in time. Recovery Time Objective (RTO) is maximum acceptable downtime before service restoration.
+Evaluation Criteria: Multi-AZ vs Multi-Region design, RPO vs RTO calculation, and data replication strategies.
+Coaching Tips: Illustrate with active-active vs active-passive database replication across cloud regions.
+
+Q6: What is IAM (Identity and Access Management) and the Principle of Least Privilege?
+Model Answer: IAM controls WHO (identities: users, roles, service accounts) can execute WHAT actions on WHICH cloud resources under WHAT conditions. Least Privilege dictates granting only minimum permissions required to perform job tasks, using narrow JSON policies and temporary security credentials (STS).
+Evaluation Criteria: IAM roles vs users, temporary credentials, RBAC (Role-Based Access Control), and policy evaluation logic.
+Coaching Tips: Recommend using IAM Roles with assume-role policies for applications instead of hardcoding static API access keys.
+
+Q7: How do Kubernetes Pods, Deployments, Services, and Ingress Work?
+Model Answer: Pods are the smallest deployable units containing 1+ containers sharing storage/network. Deployments manage Pod replica counts, rolling updates, and self-healing. Services provide stable internal IP networking and load balancing across Pod replicas. Ingress manages external HTTP/HTTPS routing into cluster Services.
+Evaluation Criteria: K8s architecture primitives, rolling updates, service discovery, and external traffic routing.
+Coaching Tips: Walk through a full deployment flow: Ingress -> Service -> Deployment -> Pods.
+
+Q8: What is Public Key Infrastructure (PKI) and Symmetric vs Asymmetric Encryption?
+Model Answer: Symmetric Encryption (AES) uses a single shared secret key for fast data encryption/decryption. Asymmetric Encryption (RSA/ECC) uses a Public Key for encryption and a Private Key for decryption. TLS/SSL hybrid cryptography uses asymmetric key exchange to negotiate a fast symmetric session key.
+Evaluation Criteria: AES vs RSA performance, key distribution, digital certificates, and TLS handshakes.
+Coaching Tips: Step through a 4-step TLS Handshake establishing secure HTTPS connections.
+
+Q9: How do Virtual Private Clouds (VPC), Subnets, Security Groups, and NACLs operate?
+Model Answer: A VPC creates isolated cloud virtual networks. Public Subnets have internet gateways; Private Subnets route outbound traffic via NAT Gateways. Security Groups act as stateful firewalls at the instance level. Network Access Control Lists (NACLs) act as stateless subnet-level packet filtering boundaries.
+Evaluation Criteria: Stateful vs stateless firewalls, CIDR block allocation, NAT gateways, and subnet routing.
+Coaching Tips: Contrast stateful Security Groups (return traffic automatically allowed) with stateless NACLs (explicit inbound/outbound rules required).
+
+Q10: What is Multi-Factor Authentication (MFA) and OAuth 2.0 / OIDC?
+Model Answer: MFA requires two authentication factors (something you know: password; something you have: TOTP token/authenticator app). OAuth 2.0 is an authorization framework issuing scoped Access Tokens. OpenID Connect (OIDC) is an identity layer built on top of OAuth 2.0 issuing ID Tokens for SSO authentication.
+Evaluation Criteria: OAuth 2.0 grant types (Authorization Code Flow with PKCE), access tokens vs ID tokens, and SSO.
+Coaching Tips: Clarify that OAuth 2.0 handles AUTHORIZATION while OIDC handles AUTHENTICATION.
+
+Q11: How do you design Cloud Cost Optimization and Resource Sizing?
+Model Answer: Cost optimization leverages: 1. Auto-Scaling groups to match demand. 2. Purchasing Reserved Instances / Savings Plans for baseline workloads (up to 70% savings). 3. Utilizing Spot Instances for stateless fault-tolerant workloads. 4. Automated lifecycle policies moving cold data to Glacier storage.
+Evaluation Criteria: Financial Operations (FinOps), Spot vs Reserved instances, storage tiers, and tag-based cost allocation.
+Coaching Tips: Detail practical storage tiering: S3 Standard -> Infrequent Access -> Glacier Deep Archive.
+
+Q12: What is a Web Application Firewall (WAF) and DDoS Protection?
+Model Answer: A WAF inspects HTTP traffic at Layer 7 to filter SQLi, XSS, and bot traffic using customizable rule sets. DDoS protection (AWS Shield, Cloudflare) operates at Layers 3, 4, and 7 to absorb volumetric traffic spikes, rate-limit excessive client IPs, and maintain service availability.
+Evaluation Criteria: OSI Layer 3/4 vs Layer 7 attacks, rate limiting, managed rule groups, and traffic scrubbing.
+Coaching Tips: Differentiate SYN flood attacks (Layer 4) from HTTP GET flood attacks (Layer 7).
+
+Q13: Explain Container Security and Image Scanning Best Practices.
+Model Answer: 1. Use minimal base images (Alpine/Distroless) to minimize attack surface. 2. Run containers as non-root users. 3. Scan images automatically during CI/CD builds for CVE vulnerabilities (Trivy, Clair). 4. Use immutable tags and sign container images.
+Evaluation Criteria: Non-root execution, vulnerability scanning, minimal OS bases, and immutable image tags.
+Coaching Tips: Give a concrete Dockerfile example enforcing non-root user execution (`USER node`).
+
+Q14: How do Cloud Load Balancers (ALB vs NLB) Work?
+Model Answer: Application Load Balancer (ALB) operates at Layer 7 (Application), routing HTTP/HTTPS traffic based on URL path, host header, or query parameters. Network Load Balancer (NLB) operates at Layer 4 (Transport), handling millions of ultra-low latency TCP/UDP connections per second.
+Evaluation Criteria: Layer 7 vs Layer 4 load balancing, sticky sessions, TLS offloading, and health checks.
+Coaching Tips: Recommend ALB for web applications requiring microservice path routing (`/api` vs `/static`) and NLB for extreme TCP performance.
+
+Q15: What is SIEM (Security Information and Event Management) and Incident Response?
+Model Answer: SIEM tools (Splunk, Microsoft Sentinel) aggregate log streams across firewalls, cloud audit logs, and OS hosts to detect threat patterns using correlation rules. Incident Response follows 6 phases: Preparation, Identification, Containment, Eradication, Recovery, and Lessons Learned.
+Evaluation Criteria: Log correlation, threat detection, incident containment, and post-incident forensics.
+Coaching Tips: Detail immediate containment actions (isolating compromised EC2 instances or revoking IAM keys).
+
+Q16: Explain Serverless Architecture (AWS Lambda, Azure Functions) Trade-offs.
+Model Answer: Serverless executes code on-demand in fully managed stateless environments without server provisioning. Advantages: zero idle infrastructure costs, automatic scaling. Trade-offs: Cold start latency, 15-minute maximum execution timeouts, and vendor lock-in risks.
+Evaluation Criteria: Event-driven execution, cold starts, stateless architecture, and concurrency limits.
+Coaching Tips: Discuss strategies to mitigate cold starts (provisioned concurrency, lightweight runtime imports).
+
+Q17: What is Cross-Region Disaster Recovery (Active-Active vs Active-Passive)?
+Model Answer: Active-Passive maintains a primary operational region and a secondary standby region receiving asynchronous database replication; traffic fails over to standby during outages (higher RTO). Active-Active runs live traffic concurrently across both regions with multi-region global databases (lower RTO/RPO, higher cost).
+Evaluation Criteria: DNS failover (Route 53 latency/health check routing), global database replication, and RPO/RTO goals.
+Coaching Tips: Discuss data conflict resolution in Active-Active global databases.
+
+Q18: Explain DevSecOps and Shifting Security Left.
+Model Answer: DevSecOps integrates security automated gates throughout the software development lifecycle rather than auditing before production. "Shifting Left" embeds SAST (Static Application Security Testing), DAST (Dynamic Testing), and dependency vulnerability scans into CI/CD pipelines.
+Evaluation Criteria: SAST vs DAST tools, automated pipeline gates, dependency scanning, and security culture.
+Coaching Tips: Explain how fixing security bugs in development is 10x cheaper than patching production breaches.
+
+Q19: What is Cloud Data Encryption (In-Transit vs At-Rest)?
+Model Answer: Encryption At-Rest protects data stored on disks/S3 using symmetric keys (AES-256) managed via Key Management Service (KMS) with automated key rotation. Encryption In-Transit protects data moving over networks using TLS 1.3 protocol suites.
+Evaluation Criteria: KMS key management (Customer Managed Keys vs AWS Managed Keys), envelope encryption, and TLS cipher suites.
+Coaching Tips: Explain Envelope Encryption: encrypting plaintext data with a Data Encryption Key (DEK), then encrypting the DEK with a KMS Master Key.
+
+Q20: How do you conduct a Cloud Security Audit and Compliance Verification (SOC2, HIPAA, ISO27001)?
+Model Answer: I run continuous compliance scanners (AWS Security Hub, Prowler) mapped against CIS Benchmarks. Audits verify: 1. Encryption turned on across all storage. 2. MFA enforced on all user accounts. 3. CloudTrail/audit logs enabled across all regions. 4. Public access blocked on storage buckets.
+Evaluation Criteria: Automated compliance auditing, CIS benchmarks, audit logging, and public bucket exposure prevention.
+Coaching Tips: Highlight automating compliance checks using IaC linters and cloud security posture management (CSPM) tools.

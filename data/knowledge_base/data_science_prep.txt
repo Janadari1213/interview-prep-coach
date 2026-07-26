@@ -1,0 +1,101 @@
+=== DATA SCIENCE & AI/ML INTERVIEW KNOWLEDGE BASE (20+ DEMO QUESTIONS & MODEL ANSWERS) ===
+
+Q1: What is the difference between Supervised, Unsupervised, and Reinforcement Learning?
+Model Answer: Supervised Learning trains models on labeled data (input-output pairs) to perform classification or regression. Unsupervised Learning discovers hidden patterns or clusters in unlabeled data (K-Means, PCA). Reinforcement Learning trains agents to maximize cumulative rewards through trial-and-error environment interaction (Q-Learning, PPO).
+Evaluation Criteria: Data labeling distinction, objective functions, and practical algorithm examples per category.
+Coaching Tips: Give clear real-world examples for each: spam filtering (Supervised), customer segmentation (Unsupervised), game AI (Reinforcement).
+
+Q2: Explain Bias-Variance Tradeoff and how to prevent Overfitting.
+Model Answer: High Bias leads to Underfitting (model is too simple to capture patterns). High Variance leads to Overfitting (model memorizes training noise and fails on unseen test data). Regularization (L1/L2), Cross-Validation, Dropout, Early Stopping, and Ensembling balance the tradeoff to minimize total generalization error.
+Evaluation Criteria: Underfitting vs overfitting identification, mathematical decomposition of MSE error, and regularization methods.
+Coaching Tips: Explain how L1 (Lasso) performs feature selection while L2 (Ridge) shrinks parameter weights.
+
+Q3: What is the difference between Precision, Recall, F1-Score, and ROC-AUC?
+Model Answer: Precision measures true positives out of all predicted positives (reduces false alarms). Recall measures true positives out of all actual positives (reduces missed cases). F1-Score is the harmonic mean of Precision and Recall. ROC-AUC measures true positive rate vs false positive rate across classification probability thresholds.
+Evaluation Criteria: Confusion matrix metrics, class imbalance metrics selection, and trade-off scenarios.
+Coaching Tips: Use medical diagnosis (high Recall preferred) vs spam detection (high Precision preferred) to illustrate choices.
+
+Q4: Explain how Decision Trees work and how Random Forest / XGBoost improve them.
+Model Answer: Decision Trees split feature spaces recursively using Information Gain (Entropy) or Gini Impurity. Single trees overfit easily. Random Forest builds an ensemble of uncorrelated trees using Bagging (Bootstrap Aggregating) and random feature selection. XGBoost uses Gradient Boosting: training sequential trees that correct residual errors of prior trees.
+Evaluation Criteria: Splitting criteria (Gini/Entropy), Bagging vs Boosting mechanisms, and hyperparameter tuning.
+Coaching Tips: Emphasize that Bagging reduces variance while Boosting reduces bias.
+
+Q5: What is the Transformer Architecture and how does Self-Attention work?
+Model Answer: Transformers (Vaswani et al.) replace recurrent neural networks (RNNs) with parallelizable Self-Attention mechanisms. Scaled Dot-Product Attention calculates relevance scores across all token pairs using Query (Q), Key (K), and Value (V) matrices: `Softmax(Q K^T / sqrt(d_k)) V`, enabling long-range context modeling without sequential bottlenecks.
+Evaluation Criteria: Attention matrix math (Q, K, V), Multi-Head Attention, positional encodings, and parallelization benefits.
+Coaching Tips: Contrast RNN O(N) sequential processing time with Transformer parallel O(1) step processing.
+
+Q6: What is the difference between L1 (Lasso) and L2 (Ridge) Regularization?
+Model Answer: L1 Regularization adds the absolute sum of weights (`lambda * sum(|w|)`) to the loss function, forcing insignificant feature weights to exactly zero (sparse feature selection). L2 Regularization adds the squared sum of weights (`lambda * sum(w^2)`), shrinking weights towards zero without making them exactly zero.
+Evaluation Criteria: Mathematical penalty terms, sparsity creation (L1), weight shrinkage (L2), and feature selection usage.
+Coaching Tips: Explain why L1 creates diamond-shaped constraint boundaries that intersect axes to produce zero weights.
+
+Q7: How do you handle Imbalanced Datasets in Classification?
+Model Answer: 1. Resampling: SMOTE (Synthetic Minority Over-sampling) or random under-sampling. 2. Algorithmic adjustments: Using class-weighted loss functions (`scale_pos_weight` in XGBoost). 3. Metric selection: Evaluating PR-AUC or F1-score instead of misleading raw Accuracy.
+Evaluation Criteria: Metric awareness, SMOTE synthetic data generation, and cost-sensitive learning.
+Coaching Tips: Highlight why raw Accuracy is a deceptive metric when minority class represents only 1% of data.
+
+Q8: What is Gradient Descent and what are Learning Rate schedules (Adam Optimizer)?
+Model Answer: Gradient Descent iteratively updates model parameters in the direction of steepest loss decrease: `w = w - lr * grad`. Adam (Adaptive Moment Estimation) combines Momentum (exponential moving average of past gradients) and RMSProp (scaling updates by root mean square of recent gradients) for fast, stable convergence.
+Evaluation Criteria: Learning rate impact (vanishing/exploding gradients), momentum, and Adam adaptive updates.
+Coaching Tips: Describe how Adam maintains both first moment (mean) and second moment (uncentered variance) gradient vectors.
+
+Q9: Explain Principal Component Analysis (PCA) for Dimensionality Reduction.
+Model Answer: PCA is an unsupervised linear transformation that projects high-dimensional data onto orthogonal axes (Principal Components) that maximize data variance. It computes the covariance matrix of features, extracts Eigenvectors (directions) and Eigenvalues (explained variance magnitude), and selects the top K components.
+Evaluation Criteria: Covariance matrix, Eigenvalues/Eigenvectors, variance preservation, and feature scaling prerequisite.
+Coaching Tips: Emphasize standardizing features (Z-score normalization) before running PCA.
+
+Q10: What is Retrieval-Augmented Generation (RAG) in LLMs?
+Model Answer: RAG connects Large Language Models to external vector databases (ChromaDB, Pinecone). External text documents are chunked, embedded using vector models, and indexed. At query time, top-K relevant chunks are retrieved via vector similarity search and injected into the LLM prompt context to eliminate hallucinations and supply up-to-date domain knowledge.
+Evaluation Criteria: Vector embeddings, cosine similarity search, chunking strategies, and hallucination reduction.
+Coaching Tips: Explain the 3 core RAG phases: Ingestion (chunking/embedding), Retrieval (vector search), and Generation (prompt context injection).
+
+Q11: How do you detect and handle Data Leakage in ML pipelines?
+Model Answer: Data Leakage occurs when information from the target variable or validation/test set leaks into the training pipeline. Common causes: scaling/imputing dataset BEFORE splitting, incorporating future temporal features, or duplicate records across train/test splits. Prevention: fit transformers ONLY on training folds within cross-validation pipelines.
+Evaluation Criteria: Identifying train-test contamination, time-series data splitting (TimeSeriesSplit), and pipeline leakage prevention.
+Coaching Tips: Emphasize wrapping preprocessors and models inside `sklearn.pipeline.Pipeline`.
+
+Q12: What is the Central Limit Theorem (CLT) and why is it important in Statistics?
+Model Answer: CLT states that the sample mean distribution of N independent, identically distributed random variables approaches a normal (Gaussian) distribution as sample size N increases, regardless of the underlying population distribution. This enables hypothesis testing (Z-tests, T-tests) and confidence interval construction.
+Evaluation Criteria: Normal distribution convergence, sample size assumptions (N >= 30), and hypothesis testing applications.
+Coaching Tips: Explain why CLT allows us to make statistical inferences about population parameters from sample data.
+
+Q13: Explain K-Means Clustering and how to choose the optimal number of clusters (K).
+Model Answer: K-Means partitions data into K clusters by iteratively: 1. Assigning points to the nearest cluster centroid (Euclidean distance). 2. Recomputing centroids as the mean of assigned points. The optimal K is selected using the Elbow Method (plotting Within-Cluster Sum of Squares - WCSS) or Silhouette Score analysis.
+Evaluation Criteria: Centroid update math, convergence criteria, Elbow method, and Silhouette coefficient.
+Coaching Tips: Mention sensitivity to initial centroid placement and how K-Means++ improves initialization.
+
+Q14: What is p-value and Hypothesis Testing (A/B Testing)?
+Model Answer: A p-value is the probability of obtaining test results at least as extreme as observed, assuming the null hypothesis (H0) is true. In A/B testing, if p-value < alpha (e.g. 0.05), we reject the null hypothesis and conclude that the variant treatment created a statistically significant performance lift.
+Evaluation Criteria: Null vs Alternative hypothesis, Significance level (alpha), Type I (false positive) and Type II (false negative) errors.
+Coaching Tips: Define Type I error (rejecting true H0) and Type II error (failing to reject false H0).
+
+Q15: Explain Convolutional Neural Networks (CNN) architecture.
+Model Answer: CNNs process grid data (images) using Convolutional Layers (applying sliding kernel filters to extract spatial feature maps), Activation functions (ReLU), Pooling Layers (Max Pooling to downsample spatial dimensions), and Fully Connected layers for final classification.
+Evaluation Criteria: Receptive fields, parameter sharing, stride/padding calculations, and feature map extraction.
+Coaching Tips: Explain why parameter sharing in convolution kernels reduces parameter count compared to fully connected layers.
+
+Q16: How do Recurrent Neural Networks (RNN) and LSTM handle Sequential Data?
+Model Answer: Vanilla RNNs process sequential data by maintaining a hidden state vector, but suffer from Vanishing/Exploding Gradients on long sequences. LSTMs (Long Short-Term Memory) resolve this using a Cell State and 3 gating mechanisms: Forget Gate (removes irrelevant information), Input Gate (adds new information), and Output Gate (produces hidden output).
+Evaluation Criteria: Vanishing gradient problem, LSTM cell state persistence, and gate equations (sigmoid/tanh).
+Coaching Tips: Contrast vanilla RNN hidden states with LSTM long-term cell state memory highways.
+
+Q17: What is Cross-Validation and Stratified K-Fold?
+Model Answer: K-Fold Cross-Validation splits data into K equal folds, training on K-1 folds and validating on 1 fold iteratively K times to assess model stability. Stratified K-Fold maintains the same target class distribution percentage in each fold as the complete dataset, essential for imbalanced classification tasks.
+Evaluation Criteria: K-Fold procedure, out-of-fold predictions, and class distribution preservation via stratification.
+Coaching Tips: Recommend 5-fold or 10-fold Stratified Cross-Validation as standard evaluation benchmark.
+
+Q18: What is Feature Engineering and Categorical Encoding (One-Hot vs Target Encoding)?
+Model Answer: Feature Engineering transforms raw data into informative model input representations. One-Hot Encoding creates binary indicator columns for low-cardinality nominal categories. Target (Mean) Encoding replaces high-cardinality categories with the mean target value of that category, using smoothing to prevent target leakage.
+Evaluation Criteria: One-Hot cardinality explosion risk, Target Encoding leakage risks, and ordinal vs nominal encoding.
+Coaching Tips: Discuss handling high-cardinality features (e.g. zip codes or user IDs) using target encoding with smoothing.
+
+Q19: How do you evaluate Large Language Models (LLM Metrics: ROUGE, BLEU, Perplexity, LLM-as-a-Judge)?
+Model Answer: BLEU and ROUGE evaluate n-gram overlap between generated and reference text (precision vs recall). Perplexity measures language model prediction uncertainty. Modern evaluation uses 'LLM-as-a-Judge': prompting strong reasoning models (GPT-4o) with evaluation rubrics to score output correctness, faithfulness, and harmlessness.
+Evaluation Criteria: N-gram metrics limitations, semantic similarity evaluation, and LLM-as-a-Judge rubric design.
+Coaching Tips: Highlight why n-gram metrics fail on paraphrased semantic answers and why LLM-as-a-Judge is preferred.
+
+Q20: Explain Model Deployment, MLOps, and Concept Drift Monitoring.
+Model Answer: MLOps automates model training, CI/CD deployment (Docker/FastAPI), and monitoring. Concept Drift occurs when statistical properties of target variables change over time; Data Drift occurs when input feature distributions change. Monitoring calculates Population Stability Index (PSI) or Kolmogorov-Smirnov (KS) tests to trigger automated retraining pipelines.
+Evaluation Criteria: MLOps architecture, Model Drift vs Data Drift detection, and automated retraining triggers.
+Coaching Tips: Explain how monitoring feature distribution shifts prevents silent production model degradation.

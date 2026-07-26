@@ -1,0 +1,101 @@
+=== QA ENGINEERING INTERVIEW KNOWLEDGE BASE (20+ DEMO QUESTIONS & MODEL ANSWERS) ===
+
+Q1: What is the difference between Manual Testing and Automated Testing?
+Model Answer: Manual Testing involves human testers executing test cases step-by-step without scripts, ideal for exploratory, UI/UX, and initial ad-hoc testing. Automated Testing uses test scripts and execution frameworks (Selenium, Playwright, PyTest) to execute repetitive, regression, and performance tests rapidly.
+Evaluation Criteria: Test coverage trade-offs, ROI of automation, and exploratory vs regression test selection.
+Coaching Tips: Explain that automation supplements manual testing by freeing testers for high-value exploratory testing.
+
+Q2: Explain the Software Testing Life Cycle (STLC) stages.
+Model Answer: STLC includes: 1. Requirement Analysis (reviewing specs). 2. Test Planning (defining strategy, scope, effort). 3. Test Case Development (writing scripts/cases). 4. Test Environment Setup (configuring hardware/test data). 5. Test Execution (running tests & logging bugs). 6. Test Closure (reporting summary metrics).
+Evaluation Criteria: Sequential understanding of STLC phases, deliverables per stage, and defect reporting.
+Coaching Tips: Detail the specific artifacts created at each stage (Test Plan, Traceability Matrix, Defect Reports).
+
+Q3: What is the difference between Black Box, White Box, and Grey Box Testing?
+Model Answer: Black Box testing tests application functionality without internal code knowledge. White Box testing inspects internal logic, code paths, and unit structures (conducted by developers). Grey Box testing combines both, using partial internal structure knowledge (e.g. inspecting DB tables or API payloads during functional tests).
+Evaluation Criteria: Code visibility differentiation, structural vs functional focus, and testing techniques.
+Coaching Tips: Associate White Box with Unit Tests, Black Box with E2E UI Tests, and Grey Box with API Integration Tests.
+
+Q4: What is Boundary Value Analysis (BVA) and Equivalence Partitioning (EP)?
+Model Answer: Equivalence Partitioning divides input data into valid and invalid partitions where the system is expected to behave similarly. Boundary Value Analysis tests values at the boundaries of these partitions (e.g. for an age input of 18-65: test 17, 18, 19, 64, 65, 66) as edge cases frequently hide defects.
+Evaluation Criteria: Black box test design techniques, boundary identification, and test case minimization.
+Coaching Tips: Demonstrate with a numerical boundary example (e.g., password length 8-20 characters).
+
+Q5: How do you design an Automation Framework architecture (Page Object Model - POM)?
+Model Answer: Page Object Model (POM) creates an abstraction layer where each web page has a corresponding class storing web element locators and action methods. Test scripts interact with Page Objects rather than hardcoded DOM locators, reducing code duplication and maintenance when UI changes occur.
+Evaluation Criteria: POM design pattern, locator encapsulation, code reusability, and maintenance reduction.
+Coaching Tips: Explain how POM isolates UI locator changes to a single page object file.
+
+Q6: What is the difference between Regression Testing and Smoke Testing?
+Model Answer: Smoke Testing (Sanity Check) is a quick build-verification test running a small subset of critical test cases to verify the build is stable enough for deeper testing. Regression Testing is a comprehensive suite verifying that recent code changes or bug fixes haven't broken existing, unchanged features.
+Evaluation Criteria: Scope, execution frequency, build pipeline integration, and execution speed.
+Coaching Tips: Frame Smoke testing as an automated pipeline gatekeeper before running full Regression suites.
+
+Q7: How do you write a complete Bug / Defect Report?
+Model Answer: A professional Defect Report contains: 1. Unique Defect ID & Title. 2. Environment Details (OS, Browser, App version). 3. Severity (impact on business) & Priority (urgency to fix). 4. Detailed Steps to Reproduce. 5. Expected vs Actual Result. 6. Attachments (screenshots, console logs, network payloads).
+Evaluation Criteria: Clarity of reproduction steps, Severity vs Priority distinction, and diagnostic evidence attached.
+Coaching Tips: Highlight the difference between Severity (System Crashes = High Severity) and Priority (Logo typo on landing page = High Priority/Low Severity).
+
+Q8: What is API Testing and how do you validate endpoints using Postman / REST Assured?
+Model Answer: API testing validates server endpoints directly without UI interaction. I verify: HTTP Status Codes (200, 201, 400), Response Payload JSON schema, Headers, Response Latency, Authentication tokens (Bearer/JWT), and Data Integrity against database records.
+Evaluation Criteria: API payload validation, HTTP status verification, error code edge-case testing, and performance metrics.
+Coaching Tips: Mention testing negative scenarios: missing mandatory JSON keys, invalid auth tokens, and SQL injection payloads.
+
+Q9: What is the Requirement Traceability Matrix (RTM) and why is it important?
+Model Answer: RTM is a grid document linking business requirements directly to corresponding test cases and defect IDs. It ensures 100% test coverage, identifies missing tests, and tracks requirement execution status throughout the STLC.
+Evaluation Criteria: Requirements coverage, backward and forward traceability, and test gap analysis.
+Coaching Tips: Explain how RTM proves to stakeholders that all business requirements were thoroughly tested.
+
+Q10: Explain Performance Testing types: Load, Stress, Endurance, and Spike Testing.
+Model Answer: Load Testing evaluates behavior under expected peak user loads. Stress Testing pushes the system beyond operational limits to identify breaking points and recovery capabilities. Endurance (Soak) Testing runs sustained loads over extended hours to detect memory leaks. Spike Testing evaluates sudden extreme traffic spikes.
+Evaluation Criteria: Performance metrics (throughput, latency, error rate, CPU/RAM utilization) and tool usage (JMeter, K6).
+Coaching Tips: Use real-world analogies (e.g. Black Friday traffic = Spike/Load testing).
+
+Q11: How do you handle Flaky Tests in Automated Test Suites?
+Model Answer: Flaky tests pass or fail inconsistently without code changes. I resolve flakiness by: 1. Replacing hardcoded `sleep()` statements with explicit dynamic waits. 2. Isolating test data state using unique dynamic test entities. 3. Ensuring independent test execution without global state dependencies.
+Evaluation Criteria: Root cause analysis of flakiness, dynamic waits usage, and test isolation.
+Coaching Tips: Strongly advise against using `Thread.sleep()` and recommend explicit element visibility waiters.
+
+Q12: What is CI/CD Pipeline Integration for Test Automation?
+Model Answer: Test suites are integrated into CI/CD pipelines (Jenkins, GitHub Actions, GitLab CI) using headless browser execution (Playwright/Selenium headless). Pipeline triggers execute unit tests on pull requests, smoke tests on staging merges, and full nightly regression runs.
+Evaluation Criteria: Continuous testing, headless execution, automated test reporting (Allure/Extent), and build status gates.
+Coaching Tips: Explain how pipeline failures block broken code from merging to production.
+
+Q13: How do you perform Exploratory Testing effectively?
+Model Answer: Exploratory testing is simultaneous learning, test design, and test execution without pre-scripted cases. I use Charter-based Session Testing: defining 30-90 minute timed charters targeting specific high-risk areas, edge cases, and user journeys while keeping detailed session notes and defect logs.
+Evaluation Criteria: Time-boxed charters, risk-based testing, ad-hoc bug discovery, and session reporting.
+Coaching Tips: Emphasize that exploratory testing is structured, targeted discovery, not random clicking.
+
+Q14: Explain Cross-Browser and Cross-Device Testing Strategies.
+Model Answer: Ensures UI layout and JavaScript execution consistency across browsers (Chrome, Firefox, Safari, Edge) and screen resolutions (Desktop, Tablet, Mobile). I use cloud testing grids (BrowserStack, SauceLabs) and responsive design breakpoints to execute automated parallel tests.
+Evaluation Criteria: Browser rendering engine differences, responsive layout verification, and cloud grid execution.
+Coaching Tips: Mention prioritizing browsers based on production analytics web traffic data.
+
+Q15: What is Security / Penetration Testing basics for QA Engineers?
+Model Answer: QA security checks focus on OWASP Top 10 vulnerabilities: testing for SQL Injection (SQLi), Cross-Site Scripting (XSS), Broken Authentication, Sensitive Data Exposure (HTTPS/SSL), and CSRF tokens.
+Evaluation Criteria: OWASP Top 10 awareness, input sanitization validation, and basic security scanner tool usage (OWASP ZAP).
+Coaching Tips: Give a simple XSS script payload input example and explain proper output encoding defenses.
+
+Q16: Compare Selenium, Cypress, and Playwright Automation Tools.
+Model Answer: Selenium uses WebDriver architecture supporting multi-language bindings (Java, Python, C#) across all browsers, but requires manual setup. Cypress runs directly inside the browser event loop for fast JavaScript/TypeScript testing. Playwright offers multi-language support, multi-browser context isolation, native auto-waiting, and superior parallel execution speed.
+Evaluation Criteria: Tool architecture comparison, speed, auto-waiting capabilities, and multi-browser support.
+Coaching Tips: Frame tool selection around project stack requirements (e.g. Playwright for modern multi-tab/multi-frame apps).
+
+Q17: What is Test-Driven Development (TDD) vs Behavior-Driven Development (BDD)?
+Model Answer: TDD follows Red-Green-Refactor: write failing unit test first, write minimal code to pass, refactor. BDD extends TDD by writing human-readable specifications using Gherkin syntax (Given-When-Then) so developers, QA, and business analysts share a common specification framework (Cucumber).
+Evaluation Criteria: Red-Green-Refactor cycle, Gherkin syntax, and collaborative specifications.
+Coaching Tips: Highlight that BDD bridges communication between technical teams and business analysts.
+
+Q18: How do you manage Test Data Creation and Isolation?
+Model Answer: I avoid relying on shared static database records. Instead, I create dynamic test data programmatically via API setup calls or database seed scripts before test execution, and clean up test data in `@AfterClass` hooks to ensure test independence.
+Evaluation Criteria: Dynamic test data generation, database seeding, test teardown hooks, and test isolation.
+Coaching Tips: Explain how static shared data causes test dependency cascades and false failure flags.
+
+Q19: What is Code Coverage and how does it relate to Test Quality?
+Model Answer: Code Coverage measures the percentage of source code lines, branches, and statements executed during automated test runs (measured via JaCoCo/Coverage.py). High code coverage (e.g. 80%+) ensures code execution, but test quality depends on assertion strength and edge-case verification.
+Evaluation Criteria: Statement, branch, and line coverage definitions, limitations of code coverage metrics, and assertion quality.
+Coaching Tips: Warn against vanity metrics: 100% code coverage without meaningful assertions does not guarantee zero bugs.
+
+Q20: How do you prioritize Test Cases when deadline pressure restricts execution time?
+Model Answer: I perform Risk-Based Testing: 1. Identify critical business paths and high-risk features (payment processing, authentication). 2. Execute automated Smoke/Sanity suites. 3. Test recently modified code areas and complex integrations. 4. De-prioritize static low-risk cosmetic features.
+Evaluation Criteria: Risk-based test selection, business impact analysis, critical path focus, and stakeholder communication.
+Coaching Tips: Communicate risk explicitly to product managers: "We tested 100% of payment critical paths; low-risk profile settings remain unverified."

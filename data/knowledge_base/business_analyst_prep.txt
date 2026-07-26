@@ -1,0 +1,101 @@
+=== BUSINESS ANALYST INTERVIEW KNOWLEDGE BASE (20+ DEMO QUESTIONS & MODEL ANSWERS) ===
+
+Q1: What is the difference between Functional and Non-Functional Requirements?
+Model Answer: Functional Requirements define WHAT the system should do (e.g., "The system shall process credit card payments"). Non-Functional Requirements specify HOW the system should perform (e.g., SLA latency under 200ms, 99.99% availability, ISO security compliance).
+Evaluation Criteria: Clear distinction between business features vs quality attributes (usability, reliability, performance).
+Coaching Tips: Provide concrete examples of each type and explain why non-functional requirements dictate technical architecture.
+
+Q2: How do you bridge the gap between technical developers and non-technical business stakeholders?
+Model Answer: I act as a translator using clear domain models, user stories, Wireframes, and Business Process Modeling Notation (BPMN). I facilitate alignment workshops, establish shared vocabulary, and validate acceptance criteria to ensure business intent matches technical execution.
+Evaluation Criteria: Stakeholder management, communication adaptation, requirements traceability, and active listening.
+Coaching Tips: Emphasize using visual diagrams (use case diagrams, flowcharts) rather than technical jargon.
+
+Q3: What is the difference between Business Requirement Document (BRD) and System Requirement Specification (SRS)?
+Model Answer: A BRD focuses on business goals, problem statements, and high-level ROI objectives created from the business perspective. An SRS translates BRD goals into detailed technical specs, data flow diagrams, API interactions, and system behavior for developers.
+Evaluation Criteria: Target audience differentiation, level of abstraction, and requirements lifecycle mapping.
+Coaching Tips: Highlight that BRD answers "WHY" and "WHAT", while SRS details "HOW" systems behave.
+
+Q4: How do you perform Gap Analysis in a Business Process?
+Model Answer: Gap Analysis evaluates the difference between current state ('As-Is') and desired future state ('To-Be'). Steps include: 1. Mapping As-Is workflows. 2. Defining target To-Be capabilities. 3. Identifying missing features, bottlenecks, and data gaps. 4. Formulating a prioritized remediation roadmap.
+Evaluation Criteria: As-Is vs To-Be process mapping, root cause identification, and actionable roadmap creation.
+Coaching Tips: Walk through a practical example like transitioning from manual paper approvals to automated digital workflows.
+
+Q5: Explain the INVEST criteria for writing effective User Stories.
+Model Answer: INVEST stands for Independent (can be built separately), Negotiable (details discussed in refinement), Valuable (delivers clear user benefit), Estimable (can be sized by developers), Small (fits within a sprint), and Testable (has explicit acceptance criteria).
+Evaluation Criteria: Agile methodology mastery, story sizing, and acceptance criteria formatting (Given-When-Then).
+Coaching Tips: Write a sample user story: "As a customer, I want to filter products by price, so that I can find affordable items."
+
+Q6: How do you conduct Requirement Elicitation with stubborn or conflicting stakeholders?
+Model Answer: I conduct 1-on-1 interviews, facilitated alignment workshops, and MoSCoW prioritization sessions (Must, Should, Could, Would). I ground decisions in data, business impact metrics, and user research to resolve conflicting opinions objectively.
+Evaluation Criteria: Conflict resolution, facilitation techniques, objective metrics usage, and consensus building.
+Coaching Tips: Discuss active listening techniques and focusing stakeholders on core business outcomes.
+
+Q7: What is BPMN (Business Process Model and Notation) and why is it useful?
+Model Answer: BPMN is a standardized graphical notation for modeling business workflows. It uses swimlanes, tasks, events (start/end), decision gateways (exclusive/parallel), and message flows to create clear, standardized visual documentation accessible to both business and technical teams.
+Evaluation Criteria: BPMN symbol knowledge (gateways, events, pools/lanes) and process optimization experience.
+Coaching Tips: Explain how decision gateways prevent ambiguous workflow paths.
+
+Q8: How do you define Acceptance Criteria using the Given-When-Then (BDD) format?
+Model Answer: Given-When-Then defines explicit conditions of satisfaction: 'Given' [initial state/precondition], 'When' [user action/trigger], 'Then' [expected system output/outcome]. Example: Given a user on checkout, When valid payment is submitted, Then display order confirmation.
+Evaluation Criteria: Behavior-Driven Development (BDD) criteria, clarity, and developer testability.
+Coaching Tips: Provide an edge-case example (e.g., expired credit card handling).
+
+Q9: What is Root Cause Analysis and how do you use the 5 Whys technique?
+Model Answer: Root Cause Analysis identifies underlying causes of business operational problems rather than patching surface symptoms. The 5 Whys iteratively asks "Why did this happen?" five times until the foundational process or systemic flaw is revealed.
+Evaluation Criteria: Problem-solving depth, 5 Whys methodology, and Fishbone (Ishikawa) diagram usage.
+Coaching Tips: Walk through a real supply chain delay or bug outbreak using 5 Whys.
+
+Q10: How do you handle Scope Creep during project execution?
+Model Answer: I enforce formal Change Control procedures. When new requirements are requested: 1. Analyze impact on budget, schedule, and resources. 2. Present impact to the Change Control Board (CCB) / Product Owner. 3. Swap lower-priority backlog items or adjust delivery dates before accepting scope changes.
+Evaluation Criteria: Change management process, impact analysis, backlog grooming, and stakeholder management.
+Coaching Tips: Reframe "saying no" into "offering trade-off choices with transparent impact analysis".
+
+Q11: What is a Use Case and what are its core components?
+Model Answer: A Use Case describes a interaction sequence between an Actor (user/system) and the application to achieve a specific goal. Key components include: Actor, Preconditions, Trigger, Main Success Scenario, Alternate/Extension Flows, and Postconditions.
+Evaluation Criteria: Actor definition, happy path vs alternate paths, and postcondition verification.
+Coaching Tips: Outline a Use Case for 'User Resets Forgotten Password'.
+
+Q12: How do you write SQL queries for Data Analysis (JOINs, GROUP BY, Aggregations)?
+Model Answer: I use SQL for data profiling and business metrics validation. Key operations include INNER/LEFT JOINs to combine tables, `WHERE` for filtering, `GROUP BY` for data aggregation (SUM, COUNT, AVG), and `HAVING` for filtering aggregated groups.
+Evaluation Criteria: SQL syntax proficiency, relational logic, and data analysis capability.
+Coaching Tips: Write a sample query finding top 5 customer segments by total revenue.
+
+Q13: What is the difference between Agile (Scrum/Kanban) and Waterfall Methodologies?
+Model Answer: Waterfall is a sequential, phase-gated approach (Requirements -> Design -> Code -> Test) best for fixed-scope projects. Agile is an iterative, incremental approach delivering working software in short sprints, allowing continuous feedback and changing requirements.
+Evaluation Criteria: Agile vs Waterfall trade-offs, sprint cadence, and backlog prioritization.
+Coaching Tips: Explain when Waterfall is appropriate (regulatory/hardware) vs Agile (software/SaaS).
+
+Q14: How do you create Wireframes and User Process Flows?
+Model Answer: I map User Process Flows to establish screen transitions, then construct low-fidelity Wireframes using tools like Figma, Balsamiq, or Miro. These visual mockups validate UI layout, user journeys, and data fields with stakeholders early before coding.
+Evaluation Criteria: Wireframing tools, user experience flow mapping, and early stakeholder validation.
+Coaching Tips: Explain the benefits of low-fidelity wireframes in preventing costly late code changes.
+
+Q15: What is MoSCoW Prioritization Technique?
+Model Answer: MoSCoW categorizes requirements into: Must Have (non-negotiable MVP core), Should Have (important but not critical for initial release), Could Have (desirable enhancements if time permits), and Won't Have (agreed out of scope for current release).
+Evaluation Criteria: Prioritization framework mastery, MVP scope management, and stakeholder alignment.
+Coaching Tips: Emphasize that Must Haves should not exceed 60% of total team capacity.
+
+Q16: How do you measure KPI and ROI success for a newly implemented business solution?
+Model Answer: I establish baseline metrics prior to launch, then track Key Performance Indicators (KPIs) post-launch (e.g., user adoption rate, task completion time reduction, error rate reduction). ROI is calculated as `(Net Benefits - Implementation Cost) / Implementation Cost * 100`.
+Evaluation Criteria: Metric quantification, baseline comparison, and business outcome measurement.
+Coaching Tips: Give a concrete example: reducing order processing time from 15 minutes to 2 minutes.
+
+Q17: What is SWAT / SWOT Analysis in Business Strategy?
+Model Answer: SWOT Analysis evaluates internal Strengths and Weaknesses along with external Opportunities and Threats. It provides a strategic framework to leverage organizational advantages, mitigate risks, and capitalize on market opportunities.
+Evaluation Criteria: Strategic analysis, internal vs external evaluation, and risk mitigation planning.
+Coaching Tips: Demonstrate how SWOT informs product strategy decisions.
+
+Q18: How do you facilitate User Acceptance Testing (UAT)?
+Model Answer: 1. Develop UAT test plans and scripts based on business acceptance criteria. 2. Train business end-users. 3. Manage UAT execution sessions and defect logging. 4. Validate bug fixes with developers. 5. Obtain formal business sign-off before production deployment.
+Evaluation Criteria: UAT test script creation, defect triage, business user training, and sign-off governance.
+Coaching Tips: Emphasize that UAT validates business fitness, not just technical bug-free code.
+
+Q19: Explain Risk Analysis and Risk Assessment Matrix.
+Model Answer: Risk Analysis identifies potential project risks and categorizes them by Likelihood (High, Medium, Low) and Impact (High, Medium, Low). High-impact/High-likelihood risks are assigned explicit mitigation plans, contingency budgets, and risk owners.
+Evaluation Criteria: Risk identification, probability-impact matrix, and mitigation strategy formulation.
+Coaching Tips: Provide mitigation examples: fallback vendors, feature toggles, or automated backups.
+
+Q20: How do you handle incomplete or ambiguous requirements from stakeholders?
+Model Answer: I conduct discovery sessions, analyze existing system data, build prototype wireframes to stimulate feedback, and ask clarifying probing questions. I document assumptions clearly and obtain explicit stakeholder validation before finalizing specifications.
+Evaluation Criteria: Proactive clarification, assumption documentation, and iterative requirements refinement.
+Coaching Tips: Detail your step-by-step approach to turning vague ideas into concrete specs.
